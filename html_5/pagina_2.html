@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Regristratie pagina</title>
+    <link rel="stylesheet" href="../css/w5hcss.css">
+</head>
+
+<body class="b2">
+    <div class = "header_bar_vb"><a class="link1_vb" href="../index.html">HTML Opdrachten</a></div>
+    <br><br><br>
+    <form method="post" action="pagina_2.html">
+        <p>
+            <label for="fm">Full Name</label><br>
+            <input type="text" name="name" id="fm" required>
+        </p>
+        <p>
+            <label for="email">Email</label><br>
+            <input type="email" name="email" id="email" required>
+        </p>
+        <p>
+            <label for="Address">Home Planet</label><br>
+            <input type="text" name="Address" id="Address" required>
+        </p>
+        <p>
+            <label for="Preferences">Spaceship Preferences</label><br>
+            <select id="Preferences" name="Preferences">
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+            </select>
+        </p>
+        <p>
+            <label for="checkbox">I agree to the terms and conditions</label>
+            <input type="checkbox" id="checkbox" name="checkbox" required>
+        </p>
+        <p>
+            <label for="textbox">Additional Info</label><br>
+            <textarea id="textbox" name="message" rows="4" cols="40"></textarea>
+        </p>
+        <p>
+            <input class="submit_vb" type="submit" value="Submit">
+        </p>
+    </form>
+</body>
+
+</html>

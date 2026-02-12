@@ -1,0 +1,73 @@
+body{
+    background-color: antiquewhite;
+    width: 100%;
+    margin: 0;
+}
+.b1{
+    background-image: url("https://cdn.mos.cms.futurecdn.net/HuGGeENt6kGyixe3hT9tnY.jpg");
+}
+.b2{
+    background-color: #343434;
+
+}
+input{
+    width: 500px;
+    height: 20px;
+    color-scheme: dark;
+    border-radius: 4px;
+}
+select{
+    width: 500px;
+    height: 20px;
+    color-scheme: dark;
+    border-radius: 4px;
+}
+.link1_vb{
+    font-size: 25px;
+    font-family: "Book Antiqua", serif;
+    text-decoration: none;
+    text-align: center;
+    color: #e6e9ec;
+}
+
+.submit_vb{
+    color-scheme: dark;
+    border-radius: 6px;
+    width: 80px;
+    height: 50px;
+}
+.submit_vb:hover{
+    background-color: #3a7ee3;
+    border-color: #3a7ee3;
+}
+
+textarea{
+    color-scheme: dark;
+    border-radius: 4px;
+}
+
+#checkbox{
+    width: 20px;
+}
+
+#color{
+    width: 60px;
+    height: 45px;
+}
+
+.header_bar_vb{
+    color-scheme: dark;
+    margin: 0;
+    width: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    height: 60px;
+}
+
+p{
+    margin-left: 170px;
+    font-size: 18px;
+    font-family: "Book Antiqua", serif;
+    color: #e6e9ec;
+}
