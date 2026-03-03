@@ -18,8 +18,6 @@ if (!isset($_SESSION["radCharacter"]))
     $_SESSION["characters"] = $characterDataset;
 }
 
-echo "Secret character: " . $_SESSION["radCharacter"] . "<br>";
-
 if (isset($_POST["ask"]))
 {
 
@@ -60,6 +58,26 @@ if (isset($_POST["ask"]))
     $feature = $_POST["feature"];
     $secret = $_SESSION["radCharacter"];
     $f = ucfirst($feature);
+    if ($f === "Hair_white")
+    {
+        $f = "White Hair";
+    }
+    elseif ($f === "Hair_black")
+    {
+        $f = "Black Hair";
+    }
+    elseif ($f === "Hair_brown")
+    {
+        $f = "Brown Hair";
+    }
+    elseif ($f === "Hair_red")
+    {
+        $f = "Red Hair";
+    }
+    elseif ($f === "Hair_blond")
+    {
+        $f = "Blonde Hair";
+    }
 
     if ($_SESSION["characters"][$secret]["features"][$feature] == 1)
     {
@@ -130,17 +148,18 @@ if (isset($_POST['reset']))
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 }
+echo '<div class="character-grid">';
 foreach ($_SESSION["characters"] as $key => $value)
 {
-
-    if ($key === "_feature_order")
-    {
+    if ($key === "_feature_order") {
         continue;
     }
 
     $img = "../images/$key.png";
     echo "<img alt='$key' src='$img'>";
 }
+echo '</div>';
+
 
     // Opdracht 7: Bouw het "Wie is het?" spel.
     // 1. Kies een willekeurig personage en sla dit op in de sessie.
@@ -184,32 +203,17 @@ foreach ($_SESSION["characters"] as $key => $value)
     <br><label for="char">Is your character: </label>
     <form method="post">
         <select name="char" id="char">
-            <option value="Alex">Alex</option>
-            <option value="Alfred">Alfred</option>
-            <option value="Anita">Anita</option>
-            <option value="Anne">Anne</option>
-            <option value="Bernard">Bernard</option>
-            <option value="Bill">Bill</option>
-            <option value="Charles">Charles</option>
-            <option value="Claire">Claire</option>
-            <option value="David">David</option>
-            <option value="Eric">Eric</option>
-            <option value="Frans">Frans</option>
-            <option value="George">George</option>
-            <option value="Herman">Herman</option>
-            <option value="Joe">Joe</option>
-            <option value="Maria">Maria</option>
-            <option value="Max">Max</option>
-            <option value="Paul">Paul</option>
-            <option value="Peter">Peter</option>
-            <option value="Philip">Philip</option>
-            <option value="Richard">Richard</option>
-            <option value="Robert">Robert</option>
-            <option value="Sam">Sam</option>
-            <option value="Susan">Susan</option>
-            <option value="Tom">Tom</option>
-            <option value="Herman">Herman</option>
+           <?php
+           foreach ($_SESSION["characters"] as $key => $value)
+           {
+               if ($key === "_feature_order")
+               {
+                   continue;
+               }
+               echo "<option value='$key'>$key</option>";
+           }
 
+           ?>
         </select>
 
         <input type="submit" name="guess" value="Guess"/>
