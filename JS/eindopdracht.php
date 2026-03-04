@@ -31,21 +31,26 @@ $country = $data[0];
 
 $name = $country["name"]["common"];
 $region = $country["region"];
+$subRegion = $country["subregion"];
 $capital = $country["capital"][0] ?? "Unknown";
+$population = $country["population"] ?? "Unknown";
 $languages = implode(", ", $country["languages"]);
 $currencyCode = array_key_first($country["currencies"]);
 $currencyName = $country["currencies"][$currencyCode]["name"];
+$flag = $country["flags"]["png"];
 
 $countryResult = "
             <div class='country-result'>
                 <p><strong>Name:</strong> $name</p>
-                <p><strong>Region:</strong> $region</p>
+                <p><strong>Region:</strong> $region</p>  
+                <p><strong>Sub-Region:</strong> $subRegion</p>
                 <p><strong>Capital:</strong> $capital</p>
+                <p><strong>Population:</strong> $population</p>
                 <p><strong>Languages:</strong> $languages</p>
                 <p><strong>Currency:</strong> $currencyName ($currencyCode)</p>
+                <img src='$flag' alt='$flag'>
             </div>
         ";
-
 ?>
 
 <!DOCTYPE html>
