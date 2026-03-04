@@ -1,29 +1,46 @@
-
-let laptop = {
-    "Color": "black ",
-    "GPU": "RTX 100 ",
-    "Hz": 144,
+let pc = {
+    "color": "black ",
+    "cpu": "amd ",
+    "gpu": "rtx "
 }
 
-window.addEventListener("load", function () {
-    document.body.style.backgroundColor = "orange"
+const headers = new Headers({
+    "Content-Type": "application/json",
+    "x-api-key": "live_eEhHHZcMeM8daSSoZGwsjTz5T932kdgLiValkNsALlwdL475xuTLjlSpTzormKTR"
+});
+
+let requestOptions = {
+    method: 'GET',
+    headers: headers,
+    redirect: 'follow'
+};
+
+window.addEventListener("load", function (){
     document.querySelector('#box1').style.backgroundColor = "green";
     document.querySelector('#box2').style.backgroundColor = "orange";
-    document.querySelector('#box1').style.backgroundColor = "pink";
-    document.querySelector('#box2').style.backgroundColor = "purple";
+    document.querySelector('#box3').style.backgroundColor = "purple";
+    document.querySelector('#box4').style.backgroundColor = "cyan";
+
     document.querySelector('#box1').addEventListener('click', function() {
-        document.querySelector("#box2").style.backgroundColor = "red"
-        document.querySelector('#box2').innerText = "Dit is nu de tekst in Box Twee."
+        document.querySelector("#box2").innerText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        document.querySelector("#box2").style.backgroundColor = "red";
     });
-
     document.querySelector('#box2').addEventListener('click', function() {
-        document.querySelector("#box1").style.backgroundColor = "red"
-        document.querySelector('#box1').innerHTML = "<h1>Groot</h1>"
+        document.querySelector("#box1").innerText = "AAAAAAAAAAAAAAAA"
+        document.querySelector("#box1").style.backgroundColor = "purple";
     });
-
     document.querySelector('#box3').addEventListener('click', function() {
-        document.querySelector("#box4").style.backgroundColor = "red"
-        document.querySelector('#box4').innerHTML = laptop.Color + laptop.GPU + laptop.Hz.toString()
+        document.querySelector("#box3").innerText = pc.cpu + pc.color + pc.gpu
+        document.querySelector("#box3").style.backgroundColor = "blue";
     });
+    document.querySelector('#box4').addEventListener('click', async function () {
 
+        let response = await fetch("https://api.thecatapi.com/v1/images/search", requestOptions);
+        let data = await response.json();
+        let img = document.createElement("img");
+        console.log(response)
+        img.src = data[0].url;
+        let src = document.getElementById("box4");
+        src.appendChild(img);
+    });
 });
