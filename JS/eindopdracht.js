@@ -9,16 +9,5 @@ window.addEventListener("load", function () {
         window.location.search = urlParams;
         //window.location.reload()
     });
-
-    function search_result_wikipedia(result) {
-        return `
-    <div class="card wiki"> 
-      <h2>${result.title}</h2>
-      <p>
-        ${result.snippet}
-      </p>
-    </div>
-  `;
-    }
 });
 
