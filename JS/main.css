@@ -14,9 +14,16 @@
     background-color: blue;
     margin-left: 200px;
 }
+
+#box4 img {
+    object-fit: cover;
+    width: 100%;
+    aspect-ratio: 1;
+    display: block;
+}
 .box {
-    height: 200px;
     width: 200px;
+    aspect-ratio: 1;
     margin-top: 300px;
     float: left;
 }
