@@ -115,7 +115,7 @@ if ($_GET['type'] === 'DataBase')
                 <p><strong>Type:</strong> $type</p>
                 <p><strong>Height:</strong> $height</p>
                 <p><strong>Weight:</strong> $weight</p>
-                <img src='Images/Pokemon/$id.png' alt='a'>
+                <img src='https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/$id.png' alt='a'>
             </div>
         ";
     }
