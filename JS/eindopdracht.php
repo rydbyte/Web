@@ -2,7 +2,7 @@
 
 function fetchCountry($url) {
     $response = @file_get_contents($url);
-    return $response ? json_decode($response, true) : null;
+    return $response = json_decode($response, true);
 }
 
 $query = $_GET['query'] ?? null;
@@ -66,10 +66,8 @@ if ($_GET['type'] === 'DataBase')
     $password = "Tweedinosdiedansen2!";
     $dbname = "pokemon";
 
-// Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
@@ -94,9 +92,9 @@ if ($_GET['type'] === 'DataBase')
     $type = null;
 
     if ($result->num_rows > 0) {
-        // Output data of each row
+
         while($row = $result->fetch_assoc()) {
-            if ($hit == 1){
+            if ($hit >= 1){
                 $type = $type."/".ucfirst($row["t"]);
             }
             if ($hit == 0) {
