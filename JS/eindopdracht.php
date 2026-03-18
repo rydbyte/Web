@@ -1,62 +1,26 @@
 <?php
 
-function fetchCountry($url) {
-    $response = @file_get_contents($url);
-    return $response = json_decode($response, true);
-}
 
-$query = $_GET['query'] ?? null;
-$error = "";
-$countryResult = "";
-
-if (!$query) {
-    $countryResult = "<p>Error: `query` parameter must be present.</p>";
-}
-
-if ($query) {
-$query = strtolower($query);
+if (isset($_GET['query'])) {
+$query = strtolower($_GET['query']);
 
 if ($_GET['type'] === 'Api') {
-    $data = fetchCountry("https://restcountries.com/v3.1/name/$query");
+
+    $data = file_get_contents("https://restcountries.com/v3.1/name/$query");
 
     if (!$data) {
-        $data = fetchCountry("https://restcountries.com/v3.1/name/$query?fullText=true");
-    }
-
-    if (!$data) {
-        $data = fetchCountry("https://restcountries.com/v3.1/capital/$query");
+        $data = file_get_contents("https://restcountries.com/v3.1/name/$query?fullText=true");
     }
 
     if (!$data) {
-        $countryResult = "<p>No matching country found.</p>";
+        $data = file_get_contents("https://restcountries.com/v3.1/capital/$query");
     }
 
-    if ($data) {
-        $country = $data[0];
-        $name = $country["name"]["common"];
-        $region = $country["region"];
-        $subRegion = $country["subregion"];
-        $capital = $country["capital"][0] ?? "Unknown";
-        $population = $country["population"] ?? "Unknown";
-        $languages = implode(", ", $country["languages"]);
-        $currencyCode = array_key_first($country["currencies"]);
-        $currencyName = $country["currencies"][$currencyCode]["name"];
-        $flag = $country["flags"]["png"];
-
-        $countryResult = "
-            <div class='country-result'>
-                <p><strong>Name:</strong> $name</p>
-                <p><strong>Region:</strong> $region</p>  
-                <p><strong>Sub-Region:</strong> $subRegion</p>
-                <p><strong>Capital:</strong> $capital</p>
-                <p><strong>Population:</strong> $population</p>
-                <p><strong>Languages:</strong> $languages</p>
-                <p><strong>Currency:</strong> $currencyName ($currencyCode)</p>
-                <img src='$flag' alt='$flag'>
-            </div>
-        ";
+    if (!$data) {
+        $data = null;
     }
-}
+
+    echo $data;
 }
 
 if ($_GET['type'] === 'DataBase')
@@ -106,47 +70,21 @@ if ($_GET['type'] === 'DataBase')
                 $weight = $row["weight"];
             }
         }
-        $countryResult = "
-            <div class='country-result'>
-                <p><strong>Id:</strong> $id</p>
-                <p><strong>Name:</strong> $name</p>  
-                <p><strong>Type:</strong> $type</p>
-                <p><strong>Height:</strong> $height</p>
-                <p><strong>Weight:</strong> $weight</p>
-                <img src='https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/$id.png' alt='a'>
-            </div>
-        ";
+        print_r(json_encode($data = [
+            "id" => $id,
+            "type" => "$type",
+            "name" => "$name",
+            "height" => "$height",
+            "weight" =>"$weight",
+            "img" => "https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/showdown/{$id}.gif",
+        ]));
     }
     else {
-        $countryResult = "<div>0 results</div>";
+        echo null;
     }
 
     $conn->close();
 }
+}
+
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Country Search</title>
-    <link rel="stylesheet" href="eindopdracht.css">
-</head>
-<body>
-
-<script src="eindopdracht.js"></script>
-<dl>
-    <dt><button id="btnApi">Api</button></dt>
-    <dt><button id="btnDataBase">DataBase</button></dt>
-    <dt><h1 id="current">Current: </h1></dt>
-</dl>
-<form method="GET">
-    <input type="search" id="fsearch" name="query" placeholder="Search for a Country...">
-    <input type="submit" id="fbutton" value="Search">
-</form>
-
-<?= $error ?>
-<?= $countryResult ?>
-
-</body>
-</html>
