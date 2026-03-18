@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Country Search</title>
+    <link rel="stylesheet" href="eindopdracht.css">
+</head>
+<body>
+
+<dl>
+    <dt><button id="btnApi">Api</button></dt>
+    <dt><button id="btnDataBase">DataBase</button></dt>
+</dl>
+<form>
+    <input type="search" id="fsearch" placeholder="Search for a Country...">
+    <input type="button" id="fbutton" value="Search">
+</form>
+
+<div hidden id="error">
+    <p>No Results.</p>
+</div>
+
+<div hidden id='pokemon-result'>
+    <p id="id"><strong>Id:</strong></p>
+    <p id="name"><strong>Name:</strong></p>
+    <p id="type"><strong>Type:</strong></p>
+    <p id="height"><strong>Height:</strong></p>
+    <p id="weight"><strong>Weight:</strong></p>
+    <img id="img" src='https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/1.png' alt='error loading' style='height: 200px'>
+</div>
+
+<div hidden id='country-result'>
+    <p id="country-name"><strong>Name:</strong></p>
+    <p id="region"><strong>Region:</strong></p>
+    <p id="sub"><strong>Sub-Region:</strong></p>
+    <p id="capital"><strong>Capital:</strong></p>
+    <p id="population"><strong>Population:</strong></p>
+    <p id="languages"><strong>Languages:</strong></p>
+    <p id="currency"><strong>Currency:</strong></p>
+    <p id="timezone"><strong>Timezone: </strong></p>
+    <img id="flag" src='' alt='$flag'>
+</div>
+
+<script src="eindopdracht.js"></script>
+
+</body>
+</html>
