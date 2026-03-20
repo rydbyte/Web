@@ -4,23 +4,23 @@ window.addEventListener("load", function () {
     const loadingbox = document.querySelector('#loading');
 
     const countryBox = document.querySelector('#country-result');
-    const c_name = document.querySelector('#country-name');
-    const c_region = document.querySelector('#region');
-    const c_sub = document.querySelector('#sub');
-    const c_capital = document.querySelector('#capital');
-    const c_population = document.querySelector('#population');
-    const c_languages = document.querySelector('#languages');
-    const c_currency = document.querySelector('#currency');
-    const c_timezone = document.querySelector('#timezone');
-    const c_flag = document.querySelector('#flag');
+    const countryname = document.querySelector('#country-name');
+    const region = document.querySelector('#region');
+    const subregion = document.querySelector('#sub');
+    const capital = document.querySelector('#capital');
+    const population = document.querySelector('#population');
+    const languages = document.querySelector('#languages');
+    const countrycurrency = document.querySelector('#currency');
+    const timezone = document.querySelector('#timezone');
+    const flag = document.querySelector('#flag');
 
     const pokeBox = document.querySelector('#pokemon-result');
-    const p_id = document.querySelector('#id');
-    const p_name = document.querySelector('#name');
-    const p_type = document.querySelector('#type');
-    const p_height = document.querySelector('#height');
-    const p_weight = document.querySelector('#weight');
-    const p_img = document.querySelector('#img');
+    const id = document.querySelector('#id');
+    const name = document.querySelector('#name');
+    const type = document.querySelector('#type');
+    const height = document.querySelector('#height');
+    const weight = document.querySelector('#weight');
+    const img = document.querySelector('#img');
 
     if (!localStorage.getItem("selected")) {
         localStorage.setItem("selected", "Api");
@@ -78,19 +78,19 @@ window.addEventListener("load", function () {
 
                 if (mode === "Api") {
                     console.log(data[0])
-                    c_name.textContent = "Name: " + data[0].name.common ?? "Unknown";
-                    c_region.textContent = "Region: " + data[0].region ?? "Unknown";
-                    c_sub.textContent = "Sub-Region: " + data[0].subregion ?? "Unknown";
-                    c_capital.textContent = "Capital: " + data[0].capital ?? "Unknown";
-                    c_population.textContent = "Population: " + data[0].population ?? "Unknown";
-                    c_timezone.textContent = "Timezone: " + data[0].timezones[0] ?? "Unknown";
+                    countryname.textContent = "Name: " + data[0].name.common ?? "Unknown";
+                    region.textContent = "Region: " + data[0].region ?? "Unknown";
+                    subregion.textContent = "Sub-Region: " + data[0].subregion ?? "Unknown";
+                    capital.textContent = "Capital: " + data[0].capital ?? "Unknown";
+                    population.textContent = "Population: " + data[0].population ?? "Unknown";
+                    timezone.textContent = "Timezone: " + data[0].timezones[0] ?? "Unknown";
 
                     let langues = Object.values(data[0].languages).join(", ");
-                    c_languages.textContent = "Languages: " + langues;
+                    languages.textContent = "Languages: " + langues;
 
                     const currency = Object.values(data[0].currencies)[0];
-                    c_currency.textContent = "Currency: " + currency.symbol + " ("+ currency.name + ")";
-                    c_flag.src = data[0].flags.png ?? "";
+                    countrycurrency.textContent = "Currency: " + currency.symbol + " ("+ currency.name + ")";
+                    flag.src = data[0].flags.png ?? "";
 
                     loadingbox.hidden = true;
                     countryBox.hidden = false;
@@ -98,12 +98,12 @@ window.addEventListener("load", function () {
 
                 if (mode === "DataBase") {
                     console.log(data)
-                    p_id.textContent = "Id: " + data.id;
-                    p_name.textContent = "Name: " + data.name;
-                    p_type.textContent = "Type: " + data.type;
-                    p_height.textContent = "Height: " + data.height /10 + "m";
-                    p_weight.textContent = "Weight: " + data.weight /10 + "kg";
-                    p_img.src = data.img;
+                    id.textContent = "Pokemon: " + data.id;
+                    name.textContent = "Name: " + data.name;
+                    type.textContent = "Type: " + data.type;
+                    height.textContent = "Height: " + data.height /10 + "m";
+                    weight.textContent = "Weight: " + data.weight /10 + "kg";
+                    img.src = data.img;
 
                     loadingbox.hidden = true;
                     pokeBox.hidden = false;
