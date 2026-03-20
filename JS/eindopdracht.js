@@ -1,6 +1,7 @@
 window.addEventListener("load", function () {
 
     const errorBox = document.querySelector('#error');
+    const loadingbox = document.querySelector('#loading');
 
     const countryBox = document.querySelector('#country-result');
     const c_name = document.querySelector('#country-name');
@@ -25,18 +26,21 @@ window.addEventListener("load", function () {
         localStorage.setItem("selected", "Api");
         document.querySelector('#btnApi').style.background = '#4b5563';
         document.querySelector('#btnDataBase').style.background = '#020617'
+        document.title = "Country Search";
     }
 
     if (localStorage.getItem("selected") === "DataBase") {
         document.querySelector('#fsearch').placeholder = "Search for a Pokémon...";
         document.querySelector('#btnDataBase').style.background = '#4b5563';
         document.querySelector('#btnApi').style.background = '#020617'
+        document.title = "Pokemon Search";
     }
 
     if (localStorage.getItem("selected") === "Api"){
         document.querySelector('#fsearch').placeholder = "Search for a Country...";
         document.querySelector('#btnApi').style.background = '#4b5563';
         document.querySelector('#btnDataBase').style.background = '#020617'
+        document.title = "Country Search";
     }
 
     document.getElementById("fsearch").addEventListener("keydown", function(e) {
@@ -55,12 +59,15 @@ window.addEventListener("load", function () {
         if (query === "") return;
 
         try {
-            const response = await fetch(
-                `http://localhost/JS/eindopdracht.php?query=${query}&type=${mode}`
-            );
+            loadingbox.hidden = false;
             errorBox.hidden = true;
             countryBox.hidden = true;
             pokeBox.hidden = true;
+
+            const response = await fetch(
+                `http://localhost/JS/eindopdracht.php?query=${query}&type=${mode}`
+            );
+
             try {
                 const data = await response.json();
 
@@ -85,6 +92,7 @@ window.addEventListener("load", function () {
                     c_currency.textContent = "Currency: " + currency.symbol + " ("+ currency.name + ")";
                     c_flag.src = data[0].flags.png ?? "";
 
+                    loadingbox.hidden = true;
                     countryBox.hidden = false;
                 }
 
@@ -93,14 +101,16 @@ window.addEventListener("load", function () {
                     p_id.textContent = "Id: " + data.id;
                     p_name.textContent = "Name: " + data.name;
                     p_type.textContent = "Type: " + data.type;
-                    p_height.textContent = "Height: " + data.height + "cm";
-                    p_weight.textContent = "Weight: " + data.weight + "g";
+                    p_height.textContent = "Height: " + data.height /10 + "m";
+                    p_weight.textContent = "Weight: " + data.weight /10 + "kg";
                     p_img.src = data.img;
 
+                    loadingbox.hidden = true;
                     pokeBox.hidden = false;
                 }
             }
             catch (err){
+                loadingbox.hidden = true;
                 errorBox.hidden = false;
             }
         } catch (err) {
@@ -113,6 +123,7 @@ window.addEventListener("load", function () {
         document.querySelector('#btnApi').style.background = '#4b5563';
         document.querySelector('#btnDataBase').style.background = '#020617'
         document.querySelector('#fsearch').placeholder = "Search for a Country...";
+        document.title = "Country Search";
     });
 
     document.querySelector('#btnDataBase').addEventListener('click', function () {
@@ -120,5 +131,6 @@ window.addEventListener("load", function () {
         document.querySelector('#btnDataBase').style.background = '#4b5563';
         document.querySelector('#btnApi').style.background = '#020617'
         document.querySelector('#fsearch').placeholder = "Search for a Pokémon...";
+        document.title = "Pokemon Search";
     });
 });
