@@ -25,9 +25,9 @@ if ($_GET['type'] === 'Api') {
 
 if ($_GET['type'] === 'DataBase')
 {
-    $servername = "127.0.0.1";
+    $servername = "";
     $username = "root";
-    $password = "Tweedinosdiedansen2!";
+    $password = "";
     $dbname = "pokemon";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
