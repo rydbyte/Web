@@ -49,17 +49,18 @@ if ($_GET['type'] === 'DataBase')
         select * from pokemon_types join types
         on pokemon_types.type_id = types.id
         join pokemon on pokemon_types.pokemon_id = pokemon.id
-        where pokemon.name = '$query'";
+        where pokemon.name LIKE '$query%'";
     }
     $result = $conn->query($sql);
     $hit = 0;
     $type = null;
+    $name = null;
 
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
-            if ($hit >= 1){
-                $type = $type."/".ucfirst($row["t"]);
+            if ($hit >= 1 && $row["name"] == strtolower($name)) {
+                $type = $type . "/" . ucfirst($row["t"]);
             }
             if ($hit == 0) {
                 $hit = 1;
